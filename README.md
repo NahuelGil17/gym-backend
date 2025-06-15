@@ -2,75 +2,178 @@
   <a href="http://nestjs.com/" target="blank"><img src="images/nestjs.png" alt="Nest Logo" width="512" /></a>
 </p>
 
-<h1 align="center">⭐ NestJS Service Template ⭐</h1>
+<h1 align="center">🏋️ Gym Management Backend API 🏋️</h1>
 
 <p align="center">
-  Template for new services based on NestJS with the Best Practices and Ready for Production
+  Sistema de gestión completo para gimnasios con arquitectura multi-tenant, autenticación Firebase y API REST
 </p>
 
 <p align="center">
-  <a href="https://github.com/AlbertHernandez/nestjs-service-template/actions/workflows/node.yml?branch=main"><img src="https://github.com/AlbertHernandez/nestjs-service-template/actions/workflows/node.yml/badge.svg?branch=main" alt="nodejs"/></a>
   <a href="https://nodejs.org/docs/latest-v20.x/api/index.html"><img src="https://img.shields.io/badge/node-20.x-green.svg" alt="node"/></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/typescript-5.x-blue.svg" alt="typescript"/></a>
-  <a href="https://docs.nestjs.com/v10/"><img src="https://img.shields.io/badge/npm-10.x-red.svg" alt="npm"/></a>
+  <a href="https://docs.nestjs.com/v10/"><img src="https://img.shields.io/badge/nestjs-10.x-red.svg" alt="nestjs"/></a>
   <a href="https://fastify.dev/"><img src="https://img.shields.io/badge/Web_Framework-Fastify_⚡-black.svg" alt="fastify"/></a>
-  <a href="https://swc.rs/"><img src="https://img.shields.io/badge/Compiler-SWC_-orange.svg" alt="swc"/></a>
-  <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Test-Vitest_-yellow.svg" alt="swc"/></a>
+  <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/Database-MongoDB-47A248.svg" alt="mongodb"/></a>
+  <a href="https://firebase.google.com/"><img src="https://img.shields.io/badge/Auth-Firebase-FFCA28.svg" alt="firebase"/></a>
   <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Dockerized 🐳_-blue.svg" alt="docker"/></a>
 </p>
 
-## 👀 Motivation
+## 🎯 Descripción del Proyecto
 
-When we start creating some new service based on NestJS most often we just use the Nest cli for starting a new service that already give us some convention and structure for our project. This is a good starting point however I was missing a couple of interesting things that almost all services should have to be ready to deploy to production like fully dockerized, ensuring coding conventions...
+**Gym Management Backend API** es un sistema completo de gestión para gimnasios construido con NestJS, que implementa una arquitectura multi-tenant robusta y escalable. El sistema permite gestionar múltiples organizaciones (gimnasios) con sus respectivos clientes, planes, rutinas y ejercicios de forma independiente y segura.
 
-For this reason I created this custom template for new services based on this framework, with everything I would like to have to start developing a service with the best practices but with a simple file structure so later developers can change to implement their logic.
+### 🚀 Características Principales
 
-Here we are not providing any specific architecture like hexagonal architecture or others, this is like a simple template where later we can customize and create the architecture we need.
+- **Multi-tenancy**: Cada organización opera de forma completamente aislada
+- **Autenticación Firebase**: Sistema seguro de autenticación y autorización
+- **Gestión de Organizaciones**: Creación automática de organizaciones con administradores
+- **API REST Completa**: Endpoints para gestión de clientes, planes, rutinas y ejercicios
+- **Reportes y Métricas**: Sistema de generación de reportes con exportación
+- **Permisos Granulares**: Control de acceso basado en roles y permisos
 
-## 🌟 What is including this template?
+## 🏗️ Arquitectura y Tecnologías
 
-1. 🐳 Fully dockerized service ready for development and production environments with the best practices for docker, trying to provide a performance and small image just with the code we really need in your environments.
-2. 👷 Use [SWC](https://swc.rs/) for compiling and running the tests of the service. As commented in the own [NestJS docs](https://docs.nestjs.com/recipes/swc), this is approximately x20 times faster than default typescript compiler that is the one that comes by default in NestJS.
-3. ⚡️ Use [Fastify](https://fastify.dev/) as Web Framework. By default, [NestJS is using Express](https://docs.nestjs.com/techniques/performance) because is the most widely-used framework for working with NodeJS, however, this does not imply is the one is going to give us the most performance. Also, NestJS is fully compatible with Fastify, so we are providing this integration by default. You can check [here](https://github.com/fastify/benchmarks#benchmarks) comparison between different web frameworks.
-4. 🐶 Integration with [husky](https://typicode.github.io/husky/) to ensure we have good quality and conventions while we are developing like:
-   - 💅 Running the linter over the files that have been changed
-   - 💬 Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to ensure our commits have a convention.
-   - ✅ Run the tests automatically.
-   - ⚙️ Check our project does not have type errors with Typescript.
-   - 🙊 Check typos to ensure we don't have grammar mistakes.
-5. 🗂️ Separate tests over production code. By default, NestJS is combining in the same folder, the `src`, the unit tests and the code we are developing for production. This is something I personally don't like so here I am separating this and having a dedicated folder for the unit tests.
-6. 🧪 Testing with [Vitest](https://vitest.dev/) and [supertest](https://github.com/ladjs/supertest) for unit and e2e tests.
-7. 🏎️ Performance testing using [k6](https://grafana.com/oss/k6/).
-8. 🤜🤛 Combine unit and e2e test coverage. In the services we may have both type of tests, unit and e2e tests, and usually we would like to see what is the combined test coverage, so we can see the full picture.
-9. 📌 Custom path aliases, where you can define your own paths (you will be able to use imports like `@/shared/logger` instead of `../../../src/shared/logger`).
-10. 🚀 CI/CD using GitHub Actions, helping ensure a good quality of our code and providing useful insights about dependencies, security vulnerabilities and others.
-11. 🐦‍🔥 Usage of ESModules instead of CommonJS, which is the standard in JavaScript.
+### Stack Tecnológico
 
-## 🤩 Other templates
+1. **🚀 NestJS**: Framework Node.js robusto para construir aplicaciones escalables del lado del servidor
+2. **⚡️ Fastify**: Web framework de alto rendimiento, más rápido que Express
+3. **🍃 MongoDB**: Base de datos NoSQL para almacenamiento flexible y escalable
+4. **🔥 Firebase**: Autenticación y autorización de usuarios
+5. **🐳 Docker**: Containerización para desarrollo y producción
+6. **👷 SWC**: Compilador ultra-rápido para TypeScript (~20x más rápido que tsc)
+7. **🧪 Vitest**: Framework de testing moderno y rápido
+8. **🏎️ K6**: Testing de rendimiento y carga
 
-Are you thinking in start new projects in other frameworks or create a super fancy library? If you like this template there are others base on this you can check:
+### Funcionalidades del Sistema
 
-- [Template for new Typescript Libraries](https://github.com/AlbertHernandez/typescript-library-template)
-- [Template for new Typescript Express Services](https://github.com/AlbertHernandez/express-typescript-service-template)
-- [Template for new GitHub Actions based on NodeJS](https://github.com/AlbertHernandez/github-action-nodejs-template)
+- **🏢 Gestión de Organizaciones**: CRUD completo de organizaciones/gimnasios
+- **👥 Gestión de Clientes**: Administración de miembros por organización
+- **📋 Planes de Entrenamiento**: Creación y asignación de planes personalizados
+- **💪 Rutinas y Ejercicios**: Base de datos completa de ejercicios y rutinas
+- **📊 Reportes y Métricas**: Generación de estadísticas y exportación de datos
+- **🔐 Control de Acceso**: Sistema de roles y permisos granulares
+- **📅 Programación**: Sistema de horarios y citas
 
-## 🧑‍💻 Developing
+## 📁 Estructura del Proyecto
 
-First, we will need to create our .env file, we can create a copy from the example one:
+```
+src/
+├── app/                    # Configuración principal de la aplicación
+├── contexts/               # Contextos de dominio
+│   ├── organizations/      # Gestión de organizaciones
+│   ├── clients/           # Gestión de clientes
+│   ├── plans/             # Planes de entrenamiento
+│   ├── routines/          # Rutinas de ejercicios
+│   ├── exercises/         # Base de datos de ejercicios
+│   ├── reports/           # Reportes y métricas
+│   └── auth/              # Autenticación y autorización
+├── shared/                # Código compartido
+│   ├── guards/            # Guards de autenticación
+│   ├── decorators/        # Decoradores personalizados
+│   ├── services/          # Servicios compartidos
+│   └── utils/             # Utilidades
+└── main.ts                # Punto de entrada
+```
+
+## 🚀 Instalación y Configuración
+
+### Prerrequisitos
+
+- Node.js 20.x o superior
+- npm 9.x o superior
+- Docker y Docker Compose
+- MongoDB (local o cloud)
+- Cuenta de Firebase con proyecto configurado
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/NahuelGil17/gym-backend.git
+cd gym-backend
+```
+
+### 2. Configurar variables de entorno
 
 ```bash
 cp .env.example .env
 ```
 
-The project is fully dockerized 🐳, if we want to start the app in **development mode**, we just need to run:
+Editar el archivo `.env` con tus configuraciones:
 
-```bash
-docker-compose up -d my-service-dev
+```env
+# Base de datos
+MONGODB_URI=mongodb://localhost:27017/gym-db
+
+# Firebase
+FIREBASE_PUBLIC_KEYS_URL=https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com
+
+# JWT
+JWT_ACCESS_SECRET=tu_secret_key_aqui
+JWT_ACCESS_EXPIRES_IN=1d
+
+# Servidor
+PORT=3000
+LOGGER_LEVEL=log
 ```
 
-This development mode will work with **hot-reload** and expose a **debug port**, port `9229`, so later we can connect to it from our editor.
+### 3. Instalación con Docker (Recomendado)
 
-Now, you should be able to start debugging configuring using your IDE. For example, if you are using vscode, you can create a `.vscode/launch.json` file with the following configuration:
+```bash
+# Modo desarrollo con hot-reload
+docker-compose up -d my-service-dev
+
+# Modo producción
+docker-compose up -d my-service-production
+```
+
+### 4. Instalación local
+
+```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Construir para producción
+npm run build
+npm start
+```
+
+## 🧪 Testing y Desarrollo
+
+### Scripts Disponibles
+
+```bash
+# Desarrollo
+npm run dev                    # Iniciar servidor con hot-reload
+npm run build                  # Construir para producción
+npm start                      # Iniciar servidor de producción
+
+# Testing
+npm run test                   # Ejecutar todos los tests
+npm run test:unit             # Tests unitarios
+npm run test:e2e              # Tests end-to-end
+npm run test:performance      # Tests de rendimiento con k6
+
+# Calidad de código
+npm run lint                  # Ejecutar linter
+npm run lint:fix             # Arreglar problemas de linting automáticamente
+npm run typos                # Verificar errores tipográficos
+```
+
+### Health Check
+
+Una vez iniciado el servidor, puedes verificar que funciona correctamente:
+
+```bash
+curl --request GET \
+  --url http://localhost:3000/health
+```
+
+### Debugging con VS Code
+
+Crear archivo `.vscode/launch.json`:
 
 ```json
 {
@@ -88,102 +191,20 @@ Now, you should be able to start debugging configuring using your IDE. For examp
 }
 ```
 
-Also, if you want to run the **production mode**, you can run:
+## 📚 API Documentation
 
-```bash
-docker-compose up -d my-service-production
-```
+### 🏢 Gestión de Organizaciones
 
-This service is providing just a health endpoint which you can call to verify the service is working as expected:
+#### Crear nueva organización con administrador
 
-```bash
-curl --request GET \
-  --url http://localhost:3000/health
-```
+Crea automáticamente una organización con su administrador en Firebase y MongoDB.
 
-If you want to stop developing, you can stop the service running:
-
-```bash
-docker-compose down
-```
-
-## ⚙️ Building
-
-```bash
-npm run build
-```
-
-## ✅ Testing
-
-The service provide different scripts for running the tests, to run all of them you can run:
-
-```bash
-npm run test
-```
-
-If you are interested just in the unit tests, you can run:
-
-```bash
-npm run test:unit
-```
-
-Or if you want e2e tests, you can execute:
-
-```bash
-npm run test:e2e
-```
-
-We also have performance testing with [k6](https://k6.io/), if you want to run it via docker, execute:
-
-```bash
-docker-compose up k6
-```
-
-Or if you want to run it from your machine, execute:
-
-```bash
-brew install k6
-npm run test:performance
-```
-
-## 💅 Linting
-
-To run the linter you can execute:
-
-```bash
-npm run lint
-```
-
-And for trying to fix lint issues automatically, you can run:
-
-```bash
-npm run lint:fix
-```
-
-## Crear nueva organización con administrador en Firebase
-
-Cuando se crea una nueva organización, automáticamente se crea:
-
-1. **Usuario administrador en Firebase Authentication**
-   - Email y contraseña proporcionados
-   - Verificación de email activada
-   - Display name configurado
-
-2. **Organización en MongoDB**
-   - Datos básicos de la organización
-   - Permisos predeterminados
-
-3. **Cliente administrador en MongoDB**
-   - Vinculado a la organización
-   - Rol de "Admin"
-   - Información personal básica
-
-### Endpoint: `POST /organizations`
+**Endpoint:** `POST /organizations`
 
 ```json
 {
   "name": "Mi Gimnasio",
-  "slug": "mi-gimnasio",
+  "slug": "mi-gimnasio", 
   "description": "Descripción opcional",
   "maxClients": 100,
   "adminUser": {
@@ -195,8 +216,7 @@ Cuando se crea una nueva organización, automáticamente se crea:
 }
 ```
 
-### Respuesta exitosa:
-
+**Respuesta exitosa:**
 ```json
 {
   "organization": { /* datos de la organización */ },
@@ -208,6 +228,37 @@ Cuando se crea una nueva organización, automáticamente se crea:
 }
 ```
 
-### Manejo de errores:
+### 🔐 Autenticación
 
-Si falla la creación del usuario en Firebase, no se crea la organización para mantener consistencia de datos.
+La API utiliza Firebase Authentication con JWT tokens. Incluir en las cabeceras:
+
+```
+Authorization: Bearer <firebase-jwt-token>
+```
+
+### 📋 Endpoints Principales
+
+- `GET /organizations` - Listar organizaciones
+- `POST /organizations` - Crear organización
+- `GET /clients` - Listar clientes (filtrado por organización)
+- `POST /clients` - Crear cliente
+- `GET /plans` - Listar planes de entrenamiento
+- `GET /routines` - Listar rutinas
+- `GET /exercises` - Listar ejercicios
+- `GET /reports` - Generar reportes
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'feat: agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abrir Pull Request
+
+## 📄 Licencia
+
+MIT License - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👨‍💻 Autor
+
+- **Nahuel Gil** - [NahuelGil17](https://github.com/NahuelGil17)
