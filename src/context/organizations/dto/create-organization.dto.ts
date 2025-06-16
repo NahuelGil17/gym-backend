@@ -65,6 +65,14 @@ export class CreateOrganizationDto {
   logoUrl?: string;
 
   @IsOptional()
+  @IsString()
+  primaryColor?: string;
+
+  @IsOptional()
+  @IsString()
+  secondaryColor?: string;
+
+  @IsOptional()
   @IsBoolean()
   isActive?: boolean;
 

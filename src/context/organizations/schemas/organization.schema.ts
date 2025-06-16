@@ -25,6 +25,12 @@ export class Organization extends Document {
   @Prop()
   logoUrl?: string;
 
+  @Prop()
+  primaryColor?: string;
+
+  @Prop()
+  secondaryColor?: string;
+
   @Prop({ default: true })
   isActive!: boolean;
 
