@@ -31,11 +31,11 @@ import { UpdateSubRoutineDto } from "@/src/context/routines/dto/update-sub-routi
 import { RoutinesService } from "@/src/context/routines/services/routines.service";
 import { SubRoutinesService } from "@/src/context/routines/services/sub-routines.service";
 import { Role } from "@/src/context/shared/constants/roles.constant";
-import { Roles } from "@/src/context/shared/guards/roles/roles.decorator";
-import { RolesGuard } from "@/src/context/shared/guards/roles/roles.guard";
+import { Permission } from "@/src/context/shared/enums/permissions.enum";
 import { Permissions } from "@/src/context/shared/guards/permissions/permissions.decorator";
 import { PermissionsGuard } from "@/src/context/shared/guards/permissions/permissions.guard";
-import { Permission } from "@/src/context/shared/enums/permissions.enum";
+import { Roles } from "@/src/context/shared/guards/roles/roles.decorator";
+import { RolesGuard } from "@/src/context/shared/guards/roles/roles.guard";
 import { validateMongoId } from "@/src/context/shared/utils/validateMongoId.validator";
 
 import { CreateRoutineDto } from "./dto/create-routine.dto";
@@ -132,7 +132,7 @@ export class RoutinesController {
     description: "Filtro por tipo de rutina",
   })
   async findAllRoutines(@Query() getRoutinesDto: GetRoutinesDto) {
-    this.logger.log("Retrieving routines with filters:", getRoutinesDto);
+    this.logger.log("Retrieving routines with filters:", JSON.stringify(getRoutinesDto, null, 2));
     try {
       const routines = await this.routinesService.getRoutines(
         getRoutinesDto.page,
@@ -141,6 +141,7 @@ export class RoutinesController {
         getRoutinesDto.type,
         getRoutinesDto.mode,
         getRoutinesDto.isGeneral,
+        getRoutinesDto.showOnScreen,
       );
       this.logger.log(`Retrieved ${routines.data.length} routines.`);
       return routines;

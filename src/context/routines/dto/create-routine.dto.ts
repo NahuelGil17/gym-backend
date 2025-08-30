@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Expose } from "class-transformer";
+import { Expose, Transform } from "class-transformer";
 import {
 	IsArray,
 	IsBoolean,
@@ -45,6 +45,16 @@ export class CreateRoutineDto {
 		example: false,
 	})
 	isGeneral!: boolean;
+
+	@Expose()
+	@Transform(({ value }) => value ?? false)
+	@IsOptional()
+	@IsBoolean()
+	@ApiProperty({
+		description: "Si la rutina se muestra en pantalla",
+		example: false,
+	})
+	showOnScreen?: boolean;
 
 	@Expose()
 	@ValidateIf((o: CreateRoutineDto) => o.isGeneral)

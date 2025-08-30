@@ -1,6 +1,6 @@
+import { TenantBaseEntity } from "@/src/context/shared/entities/tenant-base.entity";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as SchemaMongo, Types } from "mongoose";
-import { TenantBaseEntity } from "@/src/context/shared/entities/tenant-base.entity";
 
 @Schema({ timestamps: true })
 export class Routine extends TenantBaseEntity {
@@ -15,6 +15,9 @@ export class Routine extends TenantBaseEntity {
 
   @Prop({ required: true, default: false })
   isGeneral!: boolean;
+
+  @Prop({ required: true, default: false })
+  showOnScreen!: boolean;
 
   @Prop({ required: false })
   type!: string;

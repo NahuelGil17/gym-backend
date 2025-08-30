@@ -18,6 +18,7 @@ import {
 import { Routine } from "@/src/context/routines/schemas/routine.schema";
 import { EntityDocument } from "@/src/context/shared/entities/tenant-base.entity";
 
+
 interface ISubRoutineRepository {
   findById(id: string): Promise<any>;
 }
@@ -56,6 +57,23 @@ export class RoutinesService {
   ) {}
 
   async createRoutine(createRoutineDto: CreateRoutineDto): Promise<Routine> {
+    if (createRoutineDto.showOnScreen === undefined) {
+      createRoutineDto.showOnScreen = false;
+    }
+
+    if (createRoutineDto.showOnScreen) {
+      const screenRoutinesCount = await this.routineRepository.countRoutines({
+        showOnScreen: true,
+      });
+
+      if (screenRoutinesCount >= 3) {
+        throw new HttpException(
+          "No se pueden mostrar más de 3 rutinas en pantalla. Desactive alguna rutina existente antes de activar una nueva.",
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
     for (const id of createRoutineDto.subRoutines) {
       if (!id) {
         throw new HttpException(
@@ -87,6 +105,23 @@ export class RoutinesService {
     const routine = await this.routineRepository.findById(routineId);
     if (!routine) {
       throw new NotFoundException("Routine not found");
+    }
+
+    if (updateData.showOnScreen === undefined) {
+      updateData.showOnScreen = routine.showOnScreen || false;
+    }
+
+    if (updateData.showOnScreen && !routine.showOnScreen) {
+      const screenRoutinesCount = await this.routineRepository.countRoutines({
+        showOnScreen: true,
+      });
+
+      if (screenRoutinesCount >= 3) {
+        throw new HttpException(
+          "No se pueden mostrar más de 3 rutinas en pantalla. Desactive alguna rutina existente antes de activar una nueva.",
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
 
     if (!routine.isCustom && clientId) {
@@ -172,18 +207,24 @@ export class RoutinesService {
     type?: string,
     mode?: string,
     isGeneral?: boolean,
+    showOnScreen?: boolean,
   ): Promise<{
     data: Routine[];
     total: number;
     page: number;
     limit: number;
     isGeneral?: boolean;
+    showOnScreen?: boolean;
   }> {
     const offset = (page - 1) * limit;
     const filters: any = {};
 
     if (isGeneral !== undefined) {
       filters.isGeneral = isGeneral;
+    }
+
+    if (showOnScreen !== undefined) {
+      filters.showOnScreen = showOnScreen;
     }
 
     if (name) {
